@@ -1,18 +1,30 @@
-import HeaderBox from "@/components/HeaderBox";
-import RightSidebar from "@/components/RightSidebar";
-import TotalBalanceBox from "@/components/TotalBalanceBox";
+import HeaderBox from '@/components/HeaderBox'
+import RightSidebar from '@/components/RightSidebar';
+import TotalBalanceBox from '@/components/TotalBalanceBox';
+import { getLoggedInUser } from '@/lib/actions/user.actions';
 
-const Home = () => {
-  const loggedIn = { firstName: "Shakhawat", lastName: "Bijoy", email: "shakhawatbijoy@hotmail.com"};
+const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
+  //const currentPage = Number(page as string) || 1;
+  const loggedIn = await getLoggedInUser();
+  // const accounts = await getAccounts({ 
+  //   userId: loggedIn.$id 
+  // })
+
+  // if(!accounts) return;
+  
+  // const accountsData = accounts?.data;
+  // const appwriteItemId = (id as string) || accountsData[0]?.appwriteItemId;
+
+  // const account = await getAccount({ appwriteItemId })
 
   return (
-    <section className="home">
+      <section className="home">
       <div className="home-content">
         <header className="home-header">
           <HeaderBox
             type="greeting"
             title="Welcome"
-            user={loggedIn?.firstName || "Guest"}
+            user={loggedIn?.name || "Guest"}
             subtext="Access and manage your account and transaction efficiently"
           />
 
@@ -35,7 +47,7 @@ const Home = () => {
         banks={[{currentBalance: 3000.74}, {currentBalance: 3750}]}
       />  
     </section>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
