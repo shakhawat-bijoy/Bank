@@ -6,10 +6,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import Footer from './Footer'
+import PlaidLink from './PlaidLink'
 
-const Sidebar = ({user}: SiderbarProps) => {
-
-  const  pathName = usePathname();
+const Sidebar = ({ user }: SiderbarProps) => {
+  const pathname = usePathname();
 
   return (
     <section className="sidebar">
@@ -26,7 +26,7 @@ const Sidebar = ({user}: SiderbarProps) => {
         </Link>
 
         {sidebarLinks.map((item) => {
-          const isActive = pathName === item.route || pathName.startsWith(`${item.route}/`)
+          const isActive = pathname === item.route || pathname.startsWith(`${item.route}/`)
 
           return (
             <Link href={item.route} key={item.label}
@@ -48,10 +48,11 @@ const Sidebar = ({user}: SiderbarProps) => {
             </Link>
           )
         })}
-
-          USER
+        
+        <PlaidLink user={user} />
       </nav>
-          <Footer user={user}/>
+
+      <Footer user={user} />
     </section>
   )
 }
