@@ -1,8 +1,6 @@
 import Image from "next/image";
-
 import { topCategoryStyles } from "@/constants";
 import { cn } from "@/lib/utils";
-
 import { Progress } from "./ui/progress";
 
 const Category = ({ category }: CategoryProps) => {
@@ -10,10 +8,9 @@ const Category = ({ category }: CategoryProps) => {
     bg,
     circleBg,
     text: { main, count },
-    progress: { bg: progressBg, indicator },
+    progress: { bg: progressBg, indicator }, // You may not need 'indicator' here
     icon,
-  } = topCategoryStyles[category.name as keyof typeof topCategoryStyles] ||
-  topCategoryStyles.default;
+  } = topCategoryStyles[category.name as keyof typeof topCategoryStyles] || topCategoryStyles.default;
 
   return (
     <div className={cn("gap-[18px] flex p-4 rounded-xl", bg)}>
@@ -27,8 +24,7 @@ const Category = ({ category }: CategoryProps) => {
         </div>
         <Progress
           value={(category.count / category.totalCount) * 100}
-          className={cn("h-2 w-full", progressBg)}
-          indicatorClassName={cn("h-2 w-full", indicator)}
+          className={cn("h-2 w-full", progressBg)} // Keep the progress background styling here
         />
       </div>
     </div>
